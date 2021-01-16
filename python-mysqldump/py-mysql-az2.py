@@ -31,10 +31,10 @@ logname = "pymysqldump.log"
 def backup_db():
 
     logging.info("Backing up DB: " + mysqldb + " in script dir: " + os.getcwd() + " running cmd: ")
-    #for mysqldump used on my test windows I  need to add --column-statistics=0   ; and if our DB hosted with some cPanel add:  --no-tablespaces
+    #you may not always need the columnt stats --column-statistics=0   ; and if our DB hosted with some cPanel add:  --no-tablespaces
     #--opt || --compress --single-transaction --quick
     # --max-allowed-packet=1GB
-    runcmd = 'mysqldump   --compress --single-transaction --quick   --skip-lock-tables  --no-tablespaces --user="' + mysqluser +'"' + ' --password="' \
+    runcmd = 'mysqldump   --compress --single-transaction --quick --column-statistics=0  --skip-lock-tables  --no-tablespaces --user="' + mysqluser +'"' + ' --password="' \
              + mysqlpass + '"' + ' -h ' + mysqlhost + ' ' + mysqldb + '| pigz > ' + os.getcwd() + slash + localDumpFile
     logging.info (runcmd.replace(mysqlpass, "*******")) #hide pass from logging
 
@@ -46,7 +46,7 @@ def backup_db():
 def backup_db_schema():
 
     logging.info("Backing up DB SCHEMA: " + mysqldb + " in script dir: " + os.getcwd() + " running cmd: ")
-    runcmd = 'mysqldump  --compress --single-transaction --quick --no-tablespaces --no-data --user="' + mysqluser + '"' + ' --password="' \
+    runcmd = 'mysqldump  --compress --single-transaction --quick --column-statistics=0 --no-tablespaces --no-data --user="' + mysqluser + '"' + ' --password="' \
              + mysqlpass + '"' + ' -h ' + mysqlhost + ' ' + mysqldb + '| pigz > ' + os.getcwd() + slash + localDumpFileSchema
     logging.info (runcmd.replace(mysqlpass, "*******"))
     try:
