@@ -1,0 +1,25 @@
+{
+	"Mysql": {
+            "user": "",
+            "host": "",
+            "pass": "",
+            "db": ""
+	
+	},
+        "Azure": {
+            "STORAGE_KEY": "",
+            "STORAGE_ACCOUNT": "pipelinebuilds",
+            "CT_Name":"mysql-dump"
+	},
+
+        "sendMail":"true",
+	"Smtp": {
+    	    "Server": "mx1.vpsget.com",
+            "Port": 465,
+            "SenderAddress": "",
+            "Password": "",  
+            "ToAddress": "",
+            "Subject": "mysqldump to azure blob"
+         },
+	"slash": "\\"
+}
