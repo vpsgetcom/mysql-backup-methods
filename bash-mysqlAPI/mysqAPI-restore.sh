@@ -16,7 +16,7 @@ echo "....donwloading backup:"
 echo "...Decompress backup and restore:"
 
 
-echo "API backup"
+echo "...Just testing (remove dryRun in order to really restore the bcp)"
 
 #set global local_infile=ON; once better manually check this 
 #mysql --user=$mysqluser --password=$mysqlpass -e 'set global local_infile=ON;'
