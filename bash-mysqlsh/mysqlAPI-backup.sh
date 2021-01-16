@@ -9,7 +9,7 @@ rm -rf $workingdir
 mkdir $workingdir
 
 echo "API backup Instance"
-#mysqlsh --mysql -u $mysqluser  -h $mysqlhost -P 3306 -e  'util.dumpInstance("'$workingdir'",{ocimds: true,compatibility: ["strip_restricted_grants","force_innodb"]})'
+mysqlsh --mysql -u $mysqluser  -h $mysqlhost -P 3306 -e  'util.dumpInstance("'$workingdir'",{ocimds: true,compatibility: ["strip_restricted_grants","force_innodb"]})'
 
 
 echo "API backup $mysqldb schema separately:"
@@ -18,10 +18,7 @@ schemasdir="${workingdir}schemas/"
 rm -rf $schemasdir
 mkdir $schemasdir
 echo $schemasdir
-
 mysqlsh --mysql -u $mysqluser  -h $mysqlhost -P 3306 -e  'util.dumpSchemas(["'$mysqldb'"],"'$schemasdir'",{ocimds: true,compatibility: ["strip_restricted_grants","force_innodb"]})'
-
-
 
 echo "---Uploading backup instance  dump to Azure Blob---"
 echo ".....adding environment vars:"
