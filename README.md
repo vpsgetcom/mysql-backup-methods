@@ -82,7 +82,9 @@ from [python-mysqlsh] repo dir
  
 Remember to set your config in config.json and tun script after:
 
+```
 python3 py-mysqlsh-az.py
+```
 
 
 
