@@ -24,7 +24,7 @@ def pySendEmail(smtp_server, port,subject,body, sender_email, receiver_email, pa
     encoders.encode_base64(part)
     part.add_header(
         "Content-Disposition",
-        "attachment; filename= {filename}",
+        f"attachment; filename= {filename}",
     )
 
     # Add attachment to message and convert message to string
