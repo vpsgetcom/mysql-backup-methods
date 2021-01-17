@@ -76,6 +76,7 @@ az login    #procced with login
 ```
 
 **Running python scripts**
+
 from <python-mysqlsh> dir
  
 Remember to set your config in config.json and tun script after:
@@ -86,6 +87,7 @@ python3 py-mysqlsh-az.py
 **Running bash scripts ** 
 
 from <bash-..> dirs
+
 In order to use mysql-sh bash script solution you  need to install the  depencies related to the proper mailsend: 
 
 yum install epel-release
@@ -93,10 +95,13 @@ yum install ssmtp
 yum install sharutils ##for uuencode used to encode attachement
 
 Set  your config in config.sh and set your email settings in /etc/ssmtp/ssmtp.conf . My example of lines to change in ssmtp.conf provided (for my own mail server).
+
 I suggest to run bash scripts on the exact mysql server instance so in this way you may do not store the password in config or anywhere.
+
 The bash script  provided  w/o specifying  --password=$mysqlpass  in mysqlsh argument list, feel free to add it and also set password in config.sh
 
-Esure you set exec attribute on *.sh files, provided config in config.sh , ssmtp.conf and run:
+
+Esure you set exec "chmod +x" attribute on *.sh files, provided config in config.sh , ssmtp.conf and run:
 
 ./run-notify.sh 
 
