@@ -5,7 +5,7 @@ There also exists mysqbackup utility from mysql official but i did not tested it
 
 You may find the time metrics based on 950MB database hosted on 4 cpu , 4GB RAM Virtual Test server with pure ssd storage in file 
 ```
-time-metrics-tests.txt #locatd in root of current repo
+time-metrics-tests.txt 
 ```
 
 In short: mysqldump operate in a single thread and for a big databases in production  better go with mysql-sh util or percona xtrabackup (physical backup , not a logical)  - both able to multithread and compress out of the box.
@@ -14,10 +14,11 @@ The suggested way is mysql-sh using util.dump_instance() method.
 But the percona xtrabackup is little bit faster. SO if you have 1TB GB DB I suggest you to give a try with percona xtrabackup.
 Brief compare (run on mysql server): 
 
+```
 mysqlsh  util.dumpInstance  : 11.248s
 percona xtrabackup          : 7.108s
 mysqldump +pigz             : 24.483s
-
+```
 
 //The execution time differ will increase exponentially (I assume so) with increasing DB size as well as we'll use more powerful sql server/cluster for a huge DB with more cpus threads, ram, IO subsystem speed 
 
