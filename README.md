@@ -1,6 +1,6 @@
 **The examples and comparison  of doing mysql backup  based on  mysql-sh>util.dumpInstance(), percona xtrabackup and mysqldump.**
 
-There also exists **mysqbackup** utility from mysql official but it's possible to use it only under Enterprice license so I'm unable to compare mysqlbackup utulity speed at this point.
+There also exists **mysqbackup** utility from mysql official but it's possible to use it only under Enterprice license so I'm unable to compare mysqlbackup utulity speed at this point. BUT if need - you able to make just mysql datadir backup with rsync... as a last point :)
 
 
 You may find the time metrics based on 950MB database hosted on 4 cpu , 4GB RAM Virtual Test server with pure ssd storage in file 
