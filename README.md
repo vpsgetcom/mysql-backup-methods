@@ -1,6 +1,6 @@
 **The examples and comparison  of doing mysql backup  based on  mysql-sh>util.dumpInstance(), percona xtrabackup and mysqldump.**
 
-In a current example the  backup stored in Azure blob container.
+In a current examples the  backup stored in Azure blob container and the notification with log file send via email.
 
 There also exists **mysqbackup** utility from mysql official but it's possible to use it only under Enterprice license so I'm unable to compare mysqlbackup utulity speed at this point. BUT if need - you able to make just mysql datadir backup with rsync... as a last point :)
 
