@@ -76,7 +76,8 @@ az login    #procced with login
 ```
 
 **Running python scripts**
-
+from **<python-mysqlsh>** dir
+ 
 Remember to set your config in config.json and tun script after:
 
 python3 py-mysqlsh-az.py
@@ -84,6 +85,7 @@ python3 py-mysqlsh-az.py
 
 **Running bash scripts ** 
 
+from <bash-*> dir
 In order to use mysql-sh bash script solution you  need to install the  depencies related to the proper mailsend: 
 
 yum install epel-release
