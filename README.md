@@ -1,6 +1,6 @@
 **I'll show the examples of doing mysql backup  based on  mysql-sh, percona xtrabackup and mysqldump.**
 
-There also exists mysqbackup utility from mysql official but it's possible to use it only for Oracle Enterprice license so I'm unable to compare mysqlbackup utulity speed at this point.
+There also exists **mysqbackup** utility from mysql official but it's possible to use it only for Oracle Enterprice license so I'm unable to compare mysqlbackup utulity speed at this point.
 
 
 You may find the time metrics based on 950MB database hosted on 4 cpu , 4GB RAM Virtual Test server with pure ssd storage in file 
