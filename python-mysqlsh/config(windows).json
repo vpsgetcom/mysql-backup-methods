@@ -1,0 +1,26 @@
+{
+	"Mysql": {
+            "user": "",
+            "host": "", 
+            "pass": "",
+            "db": ""
+	
+	},
+        "Azure": {
+            "STORAGE_KEY": "",
+            "STORAGE_ACCOUNT": "pipelinebuilds",
+            "CT_Name":"mysqlsh-backup"
+	},
+
+        "sendMail":"true",
+	"Smtp": {
+    	    "Server": "mx1.vpsget.com",
+            "Port": 465,
+            "SenderAddress": "",
+            "Password": "",  
+            "ToAddress": "Andrii.Kyianov@gmail.com",
+            "Subject": "mysqlsh util.dump_instance()  to azure blob"
+         },
+	"slash": "\\",
+	"workingdir": "C:\\\\tmp"
+}
