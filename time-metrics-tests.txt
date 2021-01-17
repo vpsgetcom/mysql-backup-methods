@@ -1,0 +1,126 @@
+~650MB (mysqldump file) DB tests on pure SSD storage VPS
+~900MB physical 
+
+
+#xtrabackup --backup --user=ndi --password='$tR0nGP@$$w0rd' --datadir=/var/lib/mysql/ --target-dir=/home/xtrabcp/
+
+time compare: 
+
+#mysql-sh util.dumpInstance() uses threads=4 by default, so we do not specify it here as we also have 4 cpu core attached to  our test VPS.
+
+ time sh -c \" mysqlsh --mysql -u ndi  -h localhost -P 3306 --database=wikidb -e  'util.dumpInstance("/tmp/wd",{ocimds: true,compatibility: ["strip_restricted_grants","force_innodb"]})' \"  
+  Duration: 00:00:10s                                                                                            
+  Schemas dumped: 1                                                                                              
+  Tables dumped: 51                                                                                              
+  Uncompressed data size: 901.55 MB                                                                              
+  Compressed data size: 372.98 MB                                                                                
+  Compression ratio: 2.4                                                                                         
+  Rows written: 41432                                                                                            
+  Bytes written: 372.98 MB                                                                                       
+  Average uncompressed throughput: 86.33 MB/s                                                                    
+  Average compressed throughput: 35.71 MB/s                                                                      
+
+ real    0m11.248s
+ user    0m14.464s
+ sys     0m1.792s
+
+
+
+#if you have binarydata you may need to add  --hex-blob param
+ time sh -c "mysqldump -u ndi -pCvfdcvbghn654% wikidb >/home/mysqldump_test.sql"
+  real    0m14.357s
+  user    0m11.321s
+  sys     0m1.578s
+
+
+ time sh -c "mysqldump -u ndi  --opt -pCvfdcvbghn654% wikidb >/home/mysqldump_test.sql"
+   similar
+
+
+ time sh -c "mysqldump -u ndi --single-transaction --quick   --skip-lock-tables  --no-tablespaces  -pCvfdcvbghn654% wikidb >/home/mysqldump_test.sql"
+  real    0m12.253s
+  user    0m10.597s
+  sys     0m1.150s 
+
+ time sh -c "xtrabackup --backup --databases=wikidb --user=ndi --password='Cvfdcvbghn654%' --datadir=/var/lib/mysql/ --target-dir=/home/xtrabcp/"
+  real    0m8.875s
+  user    0m0.710s
+  sys     0m3.672s
+
+try reconf parralel: 
+
+ time sh -c "xtrabackup --databases=wikidb --parralel=4 --backup  --user=ndi --password='Cvfdcvbghn654%' --datadir=/var/lib/mysql/ --target-dir=/home/xtrabcp/"
+   real    0m9.132s
+   user    0m0.787s
+   sys     0m3.716s
+guesss it should be really faster on a BIUG databases and with more cpu cores;  on more powerfull server. but on a small DBs the parralel threading will not increase backup speed
+
+
+adding compression and parrallel:
+
+ time sh -c "xtrabackup --databases=wikidb --parallel=4 --compress --compress-threads=2  --backup  --user=ndi --password='Cvfdcvbghn654%' --datadir=/var/lib/mysql/ --target-dir=/home/xtrabcp/"
+  real    0m9.301s
+  user    0m9.523s
+  sys     0m2.903s
+
+   compressed backup size:
+     du -sh  /home/xtrabcp/
+     376M    /home/xtrabcp/
+   
+   uncompressed 
+      917M    /home/xtrabcp/
+
+
+tune it: 
+ 
+ time sh -c "xtrabackup --databases=wikidb --parallel=4 --compress --compress-threads=4  --backup  --user=ndi --password='Cvfdcvbghn654%' --datadir=/var/lib/mysql/ --target-dir=/home/xtrabcp/"
+   real    0m7.108s
+   user    0m9.311s
+   sys     0m2.285s
+
+
+compression with lz4 was not tested as Ive used  xtrabackuop 2.4 (for mysql 5.7) ...seems liike this option only works in xtrabackup8.0 (for mysql 8.0) 
+as per documentation  the quicklz alhoirythm   used by default 
+
+
+----
+
+**GZIP
+
+ time sh -c "mysqldump -u ndi --single-transaction --quick   --skip-lock-tables  --no-tablespaces  -pCvfdcvbghn654% wikidb |gzip >/home/mysqldump_test.sql.gz"
+  real    1m12.508s
+  user    1m21.448s
+  sys     0m1.640s
+
+
+
+
+ time sh -c "xtrabackup --backup --user=ndi --password='Cvfdcvbghn654%' --datadir=/var/lib/mysql/ --target-dir=/home/xtrabcp/  && gzip -r /home/xtrabcp"
+  real    1m6.241s
+  user    0m59.119s
+  sys     0m3.974s
+
+
+**PIGZ (multi-thread gzip)
+
+
+ time sh -c "mysqldump -u ndi --single-transaction --quick   --skip-lock-tables  --no-tablespaces  -pCvfdcvbghn654% wikidb |pigz >/home/mysqldump_test.sql.gz"
+  real    0m24.483s
+  user    1m29.331s
+  sys     0m1.605s
+
+ls -lh /home/mysqldump_test.sql.gz 
+-rw-r--r-- 1 root root 237M Jan 15 16:14 /home/mysqldump_test.sql.gz
+
+
+
+
+
+
+so we have 7.1 sec with xtrabackup+compress VS  11.2 sec mysql-sh util.dump_instance() and VS  24.4 sec with mysqldump and pigz(or vs 1m 12.5sec with mysqldump + gzip )
+with xtrabackup /mysql-sh backup we able to  see that archive is bigger as it backup kinda  more data (datadir vs db dump)  237Mb vs  376Mb
+So xtrabackup is a winner in my tests :) 
+
+
+
+
