@@ -77,7 +77,7 @@ az login    #procced with login
 
 **Running python scripts**
 
-from <python-mysqlsh> dir
+from [python-mysqlsh] repo dir
  
 Remember to set your config in config.json and tun script after:
 
@@ -86,7 +86,7 @@ python3 py-mysqlsh-az.py
 
 **Running bash scripts ** 
 
-from <bash-..> dirs
+from [bash-..] repo dirs
 
 In order to use mysql-sh bash script solution you  need to install the  depencies related to the proper mailsend: 
 
