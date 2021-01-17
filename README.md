@@ -1,4 +1,4 @@
-I'll show the examples of doing mysql backup  based on  mysql-sh, percona xtrabackup and mysqldump.
+**I'll show the examples of doing mysql backup  based on  mysql-sh, percona xtrabackup and mysqldump.**
 
 There also exists mysqbackup utility from mysql official but i did not tested it yet.
 
