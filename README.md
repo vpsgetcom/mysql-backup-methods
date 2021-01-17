@@ -94,32 +94,47 @@ from [bash-..] repo dirs
 
 In order to use mysql-sh bash script solution you  need to install the  depencies related to the proper mailsend: 
 
+```
 yum install epel-release
 yum install ssmtp
 yum install sharutils ##for uuencode used to encode attachement
+```
 
-Set  your config in config.sh and set your email settings in /etc/ssmtp/ssmtp.conf . My example of lines to change in ssmtp.conf provided (for my own mail server).
+Set  your config in config.sh and set your email settings in /etc/ssmtp/ssmtp.conf . My example of lines to change in ssmtp.conf provided in repo (for my own mail server).
 
 I suggest to run bash scripts on the exact mysql server instance so in this way you may do not store the password in config or anywhere.
 
-The bash script  provided  w/o specifying  --password=$mysqlpass  in mysqlsh argument list, feel free to add it and also set password in config.sh
+The bash script  provided  w/o specifying 
+
+```
+--password=$mysqlpass  in mysqlsh argument list (for e.g. mysqlsh able to save one-time entered pass), 
+```
+
+feel free to add it and also set password in config.sh
+
 
 
 Esure you set exec "chmod +x" attribute on *.sh files, provided config in config.sh , ssmtp.conf and run:
 
+```
 ./run-notify.sh 
 
+```
 
 **Percona XtraBackup**
 
 For percona xtrabackup you need to install percona xtrabackup util. The util version depend on your mysql server version.
 Refer to the officvial docs : 
+
 https://www.percona.com/doc/percona-xtrabackup
 
 For my test I've used the next: 
+
 https://www.percona.com/doc/percona-xtrabackup/2.4/installation/yum_repo.htm
 
+
 Please note that percona xtrabackup do not support mariadb
+
 
 
 
