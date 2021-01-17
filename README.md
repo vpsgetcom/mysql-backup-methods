@@ -8,7 +8,7 @@ You may find the time metrics based on 950MB database hosted on 4 cpu , 4GB RAM 
 time-metrics-tests.txt 
 ```
 
-In short: mysqldump operate in a single thread and for a big databases in production  better go with mysql-sh util or percona xtrabackup (physical backup , not a logical)  - both able to multithread and compress out of the box.
+In short: mysqldump operate in a single thread and for a big databases in production  better go with mysql-sh util or percona xtrabackup  - both able to multithread and compress out of the box. (physical backup techs vs logical mysqldump)
 
 The suggested way is mysql-sh using util.dump_instance() method.
 But the percona xtrabackup is little bit faster. SO if you have 1TB GB DB I suggest you to give a try with percona xtrabackup.
