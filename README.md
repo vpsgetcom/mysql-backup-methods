@@ -87,7 +87,7 @@ python3 py-mysqlsh-az.py
 
 
 
-**Running bash scripts ** 
+**Running bash scripts** 
 
 
 from [bash-..] repo dirs
