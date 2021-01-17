@@ -75,6 +75,7 @@ Login to AZ CLL:
 az login    #procced with login
 ```
 
+
 **Running python scripts**
 
 from [python-mysqlsh] repo dir
@@ -84,7 +85,10 @@ Remember to set your config in config.json and tun script after:
 python3 py-mysqlsh-az.py
 
 
+
+
 **Running bash scripts ** 
+
 
 from [bash-..] repo dirs
 
