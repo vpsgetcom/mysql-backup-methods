@@ -122,5 +122,7 @@ with xtrabackup /mysql-sh backup we able to  see that archive is bigger as it ba
 So xtrabackup is a winner in my tests :) 
 
 
+P.S. yeahh i do not use sock connect with local instance  - this may  show tiny differ results. 
+
 
 
