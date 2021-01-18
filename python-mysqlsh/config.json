@@ -21,6 +21,6 @@
             "ToAddress": "",
             "Subject": "mysqlsh util.dump_instance()  to azure blob"
          },
-	"slash": "\\",
+	"slash": "//",
 	"workingdir": "//tmp//wd1"
 }
